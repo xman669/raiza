@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Formulario de Carga - ABC Supply</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/MegaMenu2.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4"><strong>ALIS - DELIVERY</strong></h2>
+        <div>
+            <div class="row">
+                <div class="col">
+                    <p>Address your Business</p>
+                </div>
+                <div class="col">
+                    <p><strong>Phone:</strong>&nbsp;(234) 234-2344</p>
+                </div>
+                <div class="col">
+                    <p><strong>Fax: (</strong>234) 234-2343</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <div><button type="button" class="btn btn-warning ms-2" onclick="exportarPDF()">Export PDF</button></div>
+            </div>
+        </div>
+        <form>
+            <div class="row mb-3">
+                <div class="col-md-4"><label class="form-label">Date</label><input class="form-control form-control" type="date" name="date" value=""></div>
+                <div class="col-md-4"><label class="form-label">Customer</label><input class="form-control form-control" type="text" name="customer" value=""></div>
+                <div class="col-md-4"><label class="form-label">Sub Loader</label><input class="form-control form-control" type="text" name="sub_loader" value="ALIS - DELIVERY"></div>
+                <div class="col-md-4"><label class="form-label">Cust inv #</label><input class="form-control form-control" type="text" name="cust_inv" value=""></div>
+            </div>
+            <div class="mb-3"><label class="form-label">Job Address</label><input class="form-control form-control" type="text" name="job_address" value=""></div>
+            <div class="row mb-3">
+                <div class="col-md-6"><label class="form-label">Salesperson</label><input class="form-control form-control" type="text" name="salesperson" value=""></div>
+                <div class="col-md-6"><label class="form-label">KIR</label><input class="form-control form-control" type="text" name="kir" value=""></div>
+                <div class="col-md-3"><label class="form-label">Loading Date</label><input class="form-control" type="date" name="loding_date"></div>
+                <div class="col-md-6"><label class="form-label">Mig P/U#</label><input class="form-control" type="text"></div>
+                <div class="col-md-3"><label class="form-label">FOB</label><input class="form-control" type="text"></div>
+            </div> <!-- Tabla de Materiales -->
+      <h5 class="mt-4">Materials</h5>
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>PCS</th>
+            <th>Material</th>
+            <th>Qty. Counted</th>
+            <th>Load Counted</th>
+          </tr>
+        </thead>
+        <tbody id="materialsTableBody">
+          <tr>
+            <td><input type="number" class="form-control" name="pcs[]"></td>
+            <td><input type="text" class="form-control" name="material[]"></td>
+            <td><input type="number" class="form-control" name="qty_counted[]"></td>
+            <td><input type="number" class="form-control" name="qty_loaded[]"></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <button type="button" class="btn btn-outline-secondary mb-4" onclick="addRow()">Add row</button>
+      
+      <script>
+        function addRow() {
+          const table = document.getElementById("materialsTableBody");
+          const row = document.createElement("tr");
+      
+          row.innerHTML = `
+            <td><input type="number" class="form-control" name="pcs[]"></td>
+            <td><input type="text" class="form-control" name="material[]"></td>
+            <td><input type="number" class="form-control" name="qty_counted[]"></td>
+            <td><input type="number" class="form-control" name="qty_loaded[]"></td>
+          `;
+          
+          table.appendChild(row);
+        }
+      </script>  
+            <div class="mb-3"><label class="form-label">Comments</label><textarea class="form-control" id="comentarios" name="comentarios" style="max-height: 95px;"></textarea></div><button class="btn btn-success" type="submit" style="width: 100%;"><strong>Send</strong></button>
+        </form>
+    </div><script>
+  async function exportarPDF() {
+    const { jsPDF } = window.jspdf;
+    const form = document.querySelector(".container");
+
+    // Usar html2canvas para capturar el formulario
+    html2canvas(form).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'pt', 'a4');
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const imgWidth = pageWidth - 40;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+
+      pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
+      pdf.save('FormularioCarga.pdf');
+    });
+  }
+</script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

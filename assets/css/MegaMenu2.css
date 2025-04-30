@@ -1,0 +1,107 @@
+.menubar {
+  margin: 10px 0;
+}
+
+.menubar nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menubar nav ul li {
+  display: inline-block;
+  margin: 0 20px 0 0;
+}
+
+.menubar nav ul li a {
+  display: block;
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  padding: 25px 0;
+  letter-spacing: 0.5px;
+  color: #000000;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.menubar nav ul li:hover > a {
+  text-decoration: none;
+  color: #dd7e2e;
+}
+
+.menubar nav ul li .mega-menu {
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 100%;
+  background: #ffffff;
+  left: 0;
+  transition: 0.3s;
+  box-shadow: 0px 5px 8px rgba(106, 106, 106, 0.4);
+  border: 1px solid #ebebeb;
+  padding: 24px 30px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.menubar nav ul li:hover .mega-menu {
+  visibility: visible;
+  opacity: 1;
+  z-index: 99;
+}
+
+.menubar nav ul li .mega-menu ul {
+  width: 25%;
+  float: left;
+}
+
+.menubar nav ul li .mega-menu ul li {
+  display: block;
+  margin: 0;
+  padding: 6px 0px;
+}
+
+.menubar nav ul li .mega-menu ul li a {
+  text-transform: none;
+  font-size: 13px;
+  padding: 0;
+}
+
+@media (max-width: 767.98px) {
+  .menubar nav ul li .mega-menu ul {
+    width: 100%;
+    float: left;
+    margin: 0 0 22px;
+  }
+}
+
+@media (min-width: 768px) {
+  .menubar nav ul li .mega-menu ul {
+    width: 100%;
+    float: left;
+    margin: 0 0 22px;
+  }
+}
+
+@media (min-width: 992px) {
+  .menubar nav ul li .mega-menu ul {
+    width: 25%;
+  }
+}
+
+div {
+}
+
+textarea {
+}
+
+#nota {
+  height: 64px;
+}
+
+#comentarios {
+  height: 89px;
+}
+
